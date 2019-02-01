@@ -1,0 +1,32 @@
+Time: 13:00 - 13:45
+Introduction meeting with Jacob Thorsell from AcobiaFLUX where we went over the details of the project. They had a control system where the heating
+turned on when the temperature went below 21degrees C and turned off when it got to 23.5 degrees C. They thought maybe we could look at their dataset
+and predict how they should enable the different variables in heating the facility so that it stays around 22.5 degrees without spikes.
+
+
+18:25 - 
+They sent dataset in norweigan that I translated to english so that it would be easier to work with and other people in the future could look at it 
+with ease. Then i watched sentdex Data Analysis tutorials "https://www.youtube.com/playlist?list=PLQVvvaa0QuDc-3szzjeP6N6b0aDrrKyL-" to get a better
+understanding of how to visulize the data.
+
+What I learned...
+- Use python instead of excel because excel is very slow especielly when the files get bigger and you need to do simple calculations. 
+- How about using C instead? Python is just a wrapper around C and since pandas use numpy that use c you will get about the same speed. Any python simpler :)
+- How to visualize pandas datasets with matplotlib and make interactive graphs. 
+
+Result:
+Made 3 different graphs of control signals, temperature and Air pressure to get an overview of the data we work with. 
+
+
+Conclusion of overview of graphs:
+1. There is one part where they put the heat control signal very high. This resulted in the temperature never shifted to warming the water and 
+therefore the water temp. This might mean that I have to remove that part for the neural network to get good data. 
+
+2. First i thought that maybe the water temperature shouldn't change and instead change how much wind generatred to increase the heat and have the
+water temperature in the pipes stay the same. But after thinking i doubt it will work like that. What i need is data to see how an increase in
+wind speed affect the temperature and how increase of the water temp affect the temperature.
+
+3. Kanske fråga pappa om hur värmen förändrar om det är vatten temperaturen som spelar störst roll eller hur mycket det blåser. Tänker att vatten-temp
+känns som det mest logiska.
+
+4. Alltås det man kan se är att vid 12000 sänks kontroll signalen och temperaturen ökar.
