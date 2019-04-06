@@ -1,5 +1,5 @@
 # Temperature control
-Reinforcement learning to control a simple model that regulates temperature.
+<i> Reinforcement learning to control a simple model that regulates temperature. </i>
 
 
 <u> Model </u> <br>
