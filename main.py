@@ -1,6 +1,8 @@
 import gym
 import numpy as np
-
+import custom_model
+from stable_baselines.common.vec_env import DummyVecEnv
+'''
 from stable_baselines.ddpg.policies import MlpPolicy
 from stable_baselines.common.vec_env import DummyVecEnv
 from stable_baselines.ddpg.noise import NormalActionNoise, OrnsteinUhlenbeckActionNoise, AdaptiveParamNoiseSpec
@@ -27,3 +29,14 @@ while True:
     action, _states = model.predict(obs)
     obs, rewards, dones, info = env.step(action)
     env.render()
+'''
+
+env = DummyVecEnv([lambda: custom_model.Building(22)])
+
+print(env.reset())
+action = np.array([[500, 200]])
+print(action)
+state, reward, done, _ = env.step(action)
+
+print(state, reward, done)
+
