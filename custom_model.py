@@ -1,4 +1,6 @@
-# Simple temperature environment that follows gym interface.
+##########################################################################################################################################################################
+############################################# Simple temperature environment that follows the gym interface. #############################################################
+##########################################################################################################################################################################
 #
 #  Parameters:
 #        * heat_mass_capacity:           capacity of the building's heat mass [J/K]
@@ -10,9 +12,10 @@
 #        * conditioned_floor_area:       [m**2]
 #
 # inspired from https://github.com/timtroendle/simple-simple/blob/develop/simplesimple/building.py & https://github.com/openai/gym/blob/master/gym/envs/classic_control/continuous_mountain_car.py
-# 
 #
-#
+##########################################################################################################################################################################
+##########################################################################################################################################################################
+
 
 import gym
 from gym import spaces
@@ -70,9 +73,7 @@ class Building(gym.Env):
     self.action = np.array([np.random.uniform(low=0, high=50)])
 
     return self.state
-      
-  def get_state(self):
-    return self.state
+
   
   # NOT USED
   def render(self, mode='human', close=False):
