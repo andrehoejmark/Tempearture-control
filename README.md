@@ -1,3 +1,8 @@
-# Temperature_Management
-Predict how much the variables need to change to have the temperature stay around 22.5 degrees Celsius.
+# Temperature control
+Reinforcement learning to control a simple model that regulates temperature.
+
+
+<u> Model </u>
+Observation space: current_temperature
+Action space: power
 
