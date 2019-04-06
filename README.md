@@ -2,7 +2,7 @@
 <i> Reinforcement learning to control a simple model that regulates temperature. </i>
 
 
-<u> Model </u> <br>
-Observation space: current_temperature<br>
-Action space: power
+<u> <b> Model </b></u> <br>
+observation space: current_temperature<br>
+action space: power
 
