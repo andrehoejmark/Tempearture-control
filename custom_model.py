@@ -36,7 +36,7 @@ class Building(gym.Env):
     self.heat_mass_capacity = 165000 * self.conditioned_floor_area
     self.heat_transmission = 200
     self.outside_temperature = 19
-    self.time_step_size = timedelta(minutes=5) # How many minutes into future each step.
+    self.time_step_size = timedelta(minutes=10) # How many minutes into future each step.
 
     # Starting and target temperature.
     self.current_temperature = 16
@@ -47,11 +47,17 @@ class Building(gym.Env):
 
     # Observatin space 1 variable between 0 and 70 that represents the temperature in the room.
     self.observation_space = spaces.Box(low=0, high=70, shape=(1,), dtype=np.float32)
+
+  def rescale_power(self, power):
+    p = power * 500
+    return p
   
   def step(self, action):
     self.step_counter += 1
-    print(action)
-    power = min(max(action[0], 0), 1000)
+    #print(action)
+    self.action = self.rescale_power(action)
+    #print('self.action:' + str(self.action))
+    power = min(max(self.rescale_power(action[0]), 0), 1000)
     current_temperature = self.state[0]
     
     dt_by_cm = self.time_step_size.total_seconds() / self.heat_mass_capacity
@@ -59,18 +65,26 @@ class Building(gym.Env):
 
     # Potentially change since it may go over the temperature, but it should stay at target temp :)
     # Better to maybe test x steps lets say 150steps. And reward maximized when on target temp.
-    done = bool((next_temperature > (self.target_temperature-1)) and (next_temperature < (self.target_temperature+1)))  
-    self.state = np.array([current_temperature])
+    done = bool(self.step_counter > 500) #bool((next_temperature > (self.target_temperature-1)) and (next_temperature < (self.target_temperature+1)))  
+    self.state = np.array([next_temperature])
 
     # ( )² sicne it would make the network prefer small changes. If it does a big step and it's wrong it gets super big pentalty. 
     reward = -(next_temperature - self.target_temperature)**2
-    
+    '''
+    print(' ')
+    print(next_temperature, power)
+    print('target temp: ' + str(self.target_temperature))
+    print('state(next_temperature: ' + str(self.state))
+    print('action(power): ' + str(self.action))
+    print('reward: ' + str(reward))
+    print(' ')
+    '''
     return self.state, reward, done, {}
   
   def reset(self):
     self.step_counter = 0
     self.state = np.array([np.random.uniform(low=15.6, high=16.4)]) #self.current_temperature = 16
-    self.action = np.array([np.random.uniform(low=0, high=50)])
+    #self.action = np.array([0])
 
     return self.state
 
