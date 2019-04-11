@@ -54,7 +54,7 @@ class Building(gym.Env):
   
   def step(self, action):
     
-
+    
     self.step_counter += 1
     power = min(max(self.rescale_power(action[0]), 0), 10000)
     self.current_temperature = self.state[0]
@@ -65,12 +65,13 @@ class Building(gym.Env):
     self.next_temperature = (self.current_temperature * (1 - dt_by_cm * self.heat_transmission) + dt_by_cm * (power + self.heat_transmission * self.outside_temperature))
 
 
-    done = bool(self.step_counter > 500) 
+    done = bool(self.step_counter > 10000) 
     self.state = np.array([self.next_temperature])
 
     # ( )² sicne it would make the network prefer small changes. If it does a big step and it's wrong it gets super big pentalty. 
     reward = -(self.next_temperature - self.target_temperature)**2
 
+        
     '''
     print(' \nnew step')
     print('power: ' + str(power))

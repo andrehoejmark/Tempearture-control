@@ -10,7 +10,7 @@ from stable_baselines import PPO2
 
 
 env = DummyVecEnv([lambda: custom_model.Building(22)])
-model = PPO2(MlpPolicy, env, verbose=1, learning_rate = 0.002)
+model = PPO2(MlpPolicy, env, verbose=1, learning_rate = 0.0007)
 model.learn(total_timesteps=25000)
 
 #model.save("ppo2_cartpole")
@@ -35,17 +35,18 @@ while True:
     action, _states = model.predict(obs)
     obs, rewards, dones, info = env.step(action)
     #env.render()
-    print('action: ' + str(action[0][0]*500))
-    print('states: ' + str(obs))
-    print('reward: ' + str(rewards))
-    print('count: ' + str(step))
-    print(' ')
+    #print('action: ' + str(action[0][0]*500))
+    #print('states: ' + str(obs))
+    #print('reward: ' + str(rewards))
+    #print('count: ' + str(step))
+    #print(' ')
 
     temperatures.append(obs[0][0])
     actions.append(action[0][0]*5000)
-    steps.append(step)
+    steps.append(step) 
     
-    if(step == 1050):
+    if(step == 3000):
+        print('Done')
         break
 
 
