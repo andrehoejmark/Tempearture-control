@@ -43,13 +43,13 @@ class Building(gym.Env):
     self.target_temperature = target_temp
 
     # Action space with 1 variable that can vary between 0 and 1000 and stands for how much power we want to send to heating system.
-    self.action_space = spaces.Box(low=0, high=1000, shape=(1,), dtype=np.float32)
+    self.action_space = spaces.Box(low=0, high=10000, shape=(1,), dtype=np.float32)
 
     # Observatin space 1 variable between 0 and 70 that represents the temperature in the room.
     self.observation_space = spaces.Box(low=0, high=70, shape=(1,), dtype=np.float32)
 
   def rescale_power(self, power):
-    p = power * 5000
+    p = power * 3000
     return p
   
   def step(self, action):
