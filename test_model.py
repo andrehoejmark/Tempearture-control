@@ -33,7 +33,7 @@ for i in range(len(files)):
         obs, rewards, dones, info = env.step(action)
 
         temperatures.append(obs[0][0])
-        actions.append(action[0][0]*5000)
+        actions.append(action[0][0]*3000)
         steps.append(step)
         
         if(step == 15000):
