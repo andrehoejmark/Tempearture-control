@@ -10,12 +10,14 @@ from stable_baselines.common.policies import MlpPolicy
 from stable_baselines.common.vec_env import SubprocVecEnv
 from stable_baselines import PPO2
 
-PATH = "/home/andrehoejmark/projects/Tempearture-control/Logs/ppo2/"
+PATH = "/home/rickardgyll/Documents/Temp_control/Tempearture-control-master/Logs/ppo2/"
+#PATH = "/home/rickardgyll/Documents/Temp_control/Tempearture-control-master/ANDRETEST/"
 
 files = os.listdir(PATH)
 files = [s for s in os.listdir(PATH) if s.endswith('.pkl')]
 
-env = DummyVecEnv([lambda: custom_model.Building(22)])
+env = DummyVecEnv([lambda: custom_model.Building(27)])
+
 for i in range(len(files)):
 
     file = PATH + files[i]
@@ -24,19 +26,20 @@ for i in range(len(files)):
     temperatures = []
     actions = []
     steps = []
-
+    rewardss = []
     step = 0
     obs = env.reset()
     while True:
         step += 1
         action, _states = model.predict(obs)
         obs, rewards, dones, info = env.step(action)
-
+        
+        rewardss.append(rewards)
         temperatures.append(obs[0][0])
-        actions.append(action[0][0]*3000)
+        actions.append(action[0][0]*5000)
         steps.append(step)
         
-        if(step == 15000):
+        if(step == 7000):
             plt.plot(steps, temperatures)
             plt.xlabel('steps')
             plt.ylabel('temp')
