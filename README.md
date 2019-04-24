@@ -3,7 +3,7 @@
 
 
 <u> <b> Model </b></u> <br>
-observation space: current_temperature<br>
+observation space: current_temperature, Target_temprature, Outside_temprature<br>
 action space: power
 
 <br><br>
