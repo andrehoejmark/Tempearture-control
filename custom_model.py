@@ -46,7 +46,7 @@ class Building(gym.Env):
     # Starting and target temperature.
     self.current_temperature = 16
     self.target_temperature = target_temp
-    self.target_array = [27,27,27,27,27,27]
+    self.target_array = [16, 19, 21,25,37]
 
     # Action space with 1 variable that can vary between 0 and 1000 and stands for how much power we want to send to heating system.
     self.action_space = spaces.Box(low=0, high=1000, shape=(1,), dtype=np.float32)
@@ -73,7 +73,6 @@ class Building(gym.Env):
       self.outside_temperature =  self.outside_array[self.outside_counter]
       self.outside_counter += 1
     
-   
     dt_by_cm = self.time_step_size.total_seconds() / self.heat_mass_capacity
 
     self.next_temperature = (self.current_temperature * (1 - dt_by_cm * self.heat_transmission) + dt_by_cm * (power + self.heat_transmission * self.outside_temperature))
@@ -98,8 +97,6 @@ class Building(gym.Env):
     self.reset_counter += 1
     if self.reset_counter == 6:
       self.reset_counter = 0
-    #self.target_temperature =  self.target_array[self.reset_counter] 
-    #self.action = np.array([0])
     return self.state
 
   
